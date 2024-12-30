@@ -17,7 +17,7 @@ router.post('/createuser', upload.fields([{ name: 'avatar' }, { name: 'licenseFi
     const avatar = req.files['avatar'] ? req.files['avatar'][0].filename : 'default.jpg'
     const licenseFile = req.files['licenseFile'] ? req.files['licenseFile'][0].filename : null;
 
-    const userSchema = z.object({
+    const useSchema = z.object({
         name: z.string().min(1, 'Name must be more than 1 character'),
         email: z.string().email('Please Enter a Valid Email'),
         password: z.string().min(6, 'Password must be atleast 6 characters long'),
@@ -28,7 +28,7 @@ router.post('/createuser', upload.fields([{ name: 'avatar' }, { name: 'licenseFi
     })
     try {
 
-        const result = userSchema.safeParse(req.body)
+        const result = useSchema.safeParse(req.body)
         if (!result.success) {
             return res.json({ message: 'Invalid Inputs', error: result.error.errors })
         }

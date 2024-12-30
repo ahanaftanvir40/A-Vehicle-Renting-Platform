@@ -6,15 +6,18 @@ import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './store/auth.jsx'
 import ScrollToTop from './components/ScrollToTop.jsx'
 import { Toaster } from 'react-hot-toast'
+import { ThemeProvider } from './store/themeProvider.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <AuthProvider>
     <React.StrictMode>
-      <BrowserRouter>
-        <ScrollToTop />
-        <App />
-      </BrowserRouter>
+      <ThemeProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
       <Toaster position='top-center' toastOptions={{
         error: {
           duration: 5000

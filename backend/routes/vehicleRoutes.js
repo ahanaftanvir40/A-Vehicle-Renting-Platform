@@ -65,7 +65,7 @@ router.post('/vehicles', auth, upload.array('vehicleImages', 5), async (req, res
 });
 
 router.get('/vehicles/:vehicleId', auth, async (req, res) => {
-    let vehicleData = await Vehicle.findOne({ _id: req.params.vehicleId }).populate('ownerId')
+    let vehicleData = await Vehicle.findOne({ _id: req.params.vehicleId }).populate('ownerId').populate('ratings.userId', 'name email');
     //console.log(vehicleData);
     res.json(vehicleData)
 })
@@ -73,10 +73,9 @@ router.get('/vehicles/:vehicleId', auth, async (req, res) => {
 router.get('/allvehicles', async (req, res) => {
 
     const { search } = req.query || ''
-
     const searchTerms = search.split(' ').map((term) => new RegExp(term, 'i'))
 
-    // console.log(searchTerms);
+    //console.log(searchTerms);
 
     try {
 
@@ -93,10 +92,6 @@ router.get('/allvehicles', async (req, res) => {
             }))
 
         })
-        console.log(vehicleData);
-        // try {
-        //     let vehicleData = await Vehicle.find()
-
         return res.json(vehicleData)
 
     } catch (error) {
@@ -129,11 +124,11 @@ router.post('/upload', upload.array('photos', 10), async (req, res) => {
     try {
         const uploadedPhotos = [];
 
-
+        // Loop through uploaded files and process each
         for (const file of req.files) {
             const photo = new Photo({
                 name: file.originalname,
-                path: file.path
+                path: file.path // Adjust path based on your storage strategy
             });
 
             await photo.save();
@@ -146,6 +141,44 @@ router.post('/upload', upload.array('photos', 10), async (req, res) => {
         res.status(500).json({ message: 'Error uploading photos' });
     }
 });
+
+//ratings
+router.post('/vehicles/:vehicleId/rate', auth, async (req, res) => {
+    try {
+        let { rating, review } = req.body
+
+
+        const vehicle = await Vehicle.findById(req.params.vehicleId)
+
+        if (!vehicle) {
+            return res.status(404).json({ message: 'Vehicle not found' })
+        }
+
+        if (vehicle.ratings.find(rating => rating.userId.toString() === req.user.id.toString())) {
+            return res.status(400).json({ message: 'You have already rated this vehicle', code: 400 })
+        }
+
+        const newRating = {
+            userId: req.user.id,
+            rating,
+            review
+        }
+
+        vehicle.ratings.push(newRating)
+
+        const totalRatings = vehicle.ratings.length
+        const sumRatings = vehicle.ratings.reduce((sum, rating) => sum + rating.rating, 0)
+
+        vehicle.averageRating = sumRatings / totalRatings
+
+        await vehicle.save()
+
+        res.status(201).json({ message: 'Rating added successfully', vehicle })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+
+})
 
 
 export default router

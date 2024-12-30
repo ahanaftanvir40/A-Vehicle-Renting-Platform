@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
-import { AddVehicles, AllVehicles, EditProfile, Home, Login, SignUp, UserDashboard, UserProfile, Vehicle } from "../pages"
+import { AddVehicles, AdminDashboard, AllVehicles, EditProfile, Home, Login, SignUp, UserDashboard, UserProfile, Vehicle, WheelHub } from "../pages"
 import PrivateRoutes from "../utils/PrivateRoutes"
-
+import ChatAI from "../pages/ChatAI"
 
 
 
@@ -20,9 +20,12 @@ function AllRoutes() {
                     <Route path="/addvehicles" element={<AddVehicles />}></Route>
                     <Route path="/vehicles/:vehicleId" element={<Vehicle />}></Route>
                     <Route path="/userdashboard" element={<UserDashboard />}></Route>
+                    <Route path="/chatai" element={<ChatAI />}></Route>
+                    <Route path="/WheelHub" element={<WheelHub />}></Route>
 
                 </Route>
 
+                <Route path="/admin" element={<AdminDashboard />}></Route>
 
 
 

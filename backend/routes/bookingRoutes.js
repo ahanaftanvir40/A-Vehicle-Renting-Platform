@@ -7,7 +7,7 @@ import { Vehicle } from "../models/vehicle.models.js";
 
 const router = express.Router();
 
-router.post("/bookings_21301331", auth, async (req, res) => {
+router.post("/bookings", auth, async (req, res) => {
   const {
     vehicleId,
     ownerId,
@@ -82,7 +82,7 @@ router.post("/bookings_21301331", auth, async (req, res) => {
   }
 });
 
-router.get("/bookings/pending_21301331", auth, async (req, res) => {
+router.get("/bookings/pending", auth, async (req, res) => {
   try {
     const bookings = await Booking.find({
       ownerId: req.user.id,

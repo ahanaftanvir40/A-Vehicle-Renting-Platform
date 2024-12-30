@@ -3,6 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { VehicleTypes, VehicleCategories } from "../utils/enum";
 
+//ui
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Checkbox } from "@/components/ui/checkbox"
+
 function AddVehicles() {
     const navigate = useNavigate();
     const [vehicle, setVehicle] = useState({
@@ -103,258 +112,129 @@ function AddVehicles() {
     };
 
     return (
-        <div className="mx-auto  p-4 h-screen flex items-center justify-center ">
-            <form onSubmit={handleSubmit} className="space-y-6 max-w-xl w-full bg-[#2f2d3b] shadow-lg rounded-lg p-6">
-                {step === 1 && (
-                    <>
-                        <div>
-                            <label htmlFor="type" className="block text-sm font-medium text-gray-300">
-                                Type:
-                            </label>
-                            <select
-                                name="type"
-                                value={vehicle.type}
-                                onChange={handleChange}
-                                className="mt-1 block w-full text-black/70 bg-[#cfcad1] rounded-md border-gray-300 shadow-sm outline-none"
-                            >
-                                {Object.values(VehicleTypes).map((type) => (
-                                    <option key={type} value={type}>
-                                        {type}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-
-                        <div>
-                            <label htmlFor="brand" className="block text-sm font-medium text-gray-700">
-                                Brand:
-                            </label>
-                            <input
-                                type="text"
-                                name="brand"
-                                value={vehicle.brand}
-                                onChange={handleChange}
-                                required
-                                className="mt-1 block w-full rounded-md bg-[#cfcad1] border-gray-300 shadow-sm outline-none"
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="model" className="block text-sm font-medium text-gray-700">
-                                Model:
-                            </label>
-                            <input
-                                type="text"
-                                name="model"
-                                value={vehicle.model}
-                                onChange={handleChange}
-                                required
-                                className="mt-1 block w-full rounded-md bg-[#cfcad1] border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="year" className="block text-sm font-medium text-gray-700">
-                                Year:
-                            </label>
-                            <input
-                                type="number"
-                                name="year"
-                                value={vehicle.year}
-                                onChange={handleChange}
-                                required
-                                className="mt-1 block w-full rounded-md bg-[#cfcad1] border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-                                Description:
-                            </label>
-                            <textarea
-                                id="description"
-                                name="description"
-                                rows={4}
-                                placeholder="Write your thoughts here..."
-                                value={vehicle.description}
-                                onChange={handleChange}
-                                className="mt-1 block w-full resize-none bg-[#cfcad1] rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            />
-                        </div>
-
-                        <div className="flex justify-end">
-                            <button
-                                type="button"
-                                onClick={nextStep}
-                                className="px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-200"
-                            >
-                                Next
-                            </button>
-                        </div>
-                    </>
-                )}
-
-                {step === 2 && (
-                    <>
-                        <div>
-                            <label htmlFor="pricePerDay" className="block text-sm font-medium text-gray-700">
-                                Price per day:
-                            </label>
-                            <input
-                                type="number"
-                                name="pricePerDay"
-                                value={vehicle.pricePerDay}
-                                onChange={handleChange}
-                                required
-                                className="mt-1 block w-full rounded-md bg-[#cfcad1] border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="location" className="block text-sm font-medium text-gray-700">
-                                Location:
-                            </label>
-                            <input
-                                type="text"
-                                name="location"
-                                value={vehicle.location}
-                                onChange={handleChange}
-                                required
-                                className="mt-1 block w-full rounded-md border-gray-300 bg-[#cfcad1] shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            />
-                        </div>
-
-                        <div className="flex items-center">
-                            <input
-                                type="checkbox"
-                                name="currentLocation"
-                                checked={currentLocation}
-                                onChange={handleCheckboxChange}
-                                className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                            />
-                            <label htmlFor="currentLocation" className="ml-2 text-sm text-gray-700">
-                                Set your current location as your location?
-                            </label>
-                        </div>
-
-                        <div className="flex items-center">
-                            <input
-                                type="checkbox"
-                                name="availability"
-                                checked={vehicle.availability}
-                                onChange={(e) => setVehicle({ ...vehicle, availability: e.target.checked })}
-                                className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                            />
-                            <label htmlFor="availability" className="ml-2 text-sm text-gray-700">
-                                Available for rent
-                            </label>
-                        </div>
-
-                        <div>
-                            <label htmlFor="images" className="block text-sm font-medium text-gray-700">
-                                Images:
-                            </label>
-                            <input
-                                type="file"
-                                name="images"
-                                multiple
-                                onChange={handleImageChange}
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm  focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="category" className="block text-sm font-medium text-gray-700">
-                                Category:
-                            </label>
-                            <select
-                                name="category"
-                                value={vehicle.category}
-                                onChange={handleChange}
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-[#cfcad1] outline-none"
-                            >
-                                {Object.values(VehicleCategories).map((category) => (
-                                    <option key={category} value={category}>
-                                        {category}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-
-                        <div>
-                            <label htmlFor="condition" className="block text-sm font-medium text-gray-700">
-                                Condition:
-                            </label>
-                            <input
-                                type="text"
-                                name="condition"
-                                value={vehicle.condition}
-                                onChange={handleChange}
-                                required
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-[#cfcad1] outline-none"
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="no_plate" className="block text-sm font-medium text-gray-700">
-                                Number Plate:
-                            </label>
-                            <input
-                                type="text"
-                                name="no_plate"
-                                value={vehicle.no_plate}
-                                onChange={handleChange}
-                                required
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm outline-none"
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="chassis_no" className="block text-sm font-medium text-gray-700">
-                                Chassis Number:
-                            </label>
-                            <input
-                                type="text"
-                                name="chassis_no"
-                                value={vehicle.chassis_no}
-                                onChange={handleChange}
-                                required
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm outline-none"
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="registration_no" className="block text-sm font-medium text-gray-700">
-                                Registration Number:
-                            </label>
-                            <input
-                                type="text"
-                                name="registration_no"
-                                value={vehicle.registration_no}
-                                onChange={handleChange}
-                                required
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm outline-none"
-                            />
-                        </div>
-
-                        <div className="flex justify-between">
-                            <button
-                                type="button"
-                                onClick={prevStep}
-                                className="px-4 py-2 bg-gray-500 text-white rounded-md shadow hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-200"
-                            >
+        <div className="container mx-auto p-4 min-h-screen flex items-start py-20 justify-center ">
+            <Card className="w-full max-w-4xl bg-white text-black border-none outline-none shadow-xl">
+                <CardHeader>
+                    <CardTitle>Vehicle Registration</CardTitle>
+                    <CardDescription>Enter your vehicle details below</CardDescription>
+                </CardHeader>
+                <form onSubmit={handleSubmit}>
+                    <CardContent className="space-y-6">
+                        {step === 1 && (
+                            <>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="type">Type</Label>
+                                        <Select name="type" value={vehicle.type} onValueChange={handleChange}>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select vehicle type" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {Object.values(VehicleTypes).map((type) => (
+                                                    <SelectItem key={type} value={type}>{type}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="brand">Brand</Label>
+                                        <Input type="text" name="brand" value={vehicle.brand} onChange={handleChange} required />
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="model">Model</Label>
+                                        <Input type="text" name="model" value={vehicle.model} onChange={handleChange} required />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="year">Year</Label>
+                                        <Input type="number" name="year" value={vehicle.year} onChange={handleChange} required />
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="description">Description</Label>
+                                    <Textarea name="description" value={vehicle.description} onChange={handleChange} className="resize-none" />
+                                </div>
+                            </>
+                        )}
+                        {step === 2 && (
+                            <>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="pricePerDay">Price per day</Label>
+                                        <Input type="number" name="pricePerDay" value={vehicle.pricePerDay} onChange={handleChange} required />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="location">Location</Label>
+                                        <Input type="text" autoComplete="off" name="location" value={vehicle.location} onChange={handleChange} required />
+                                    </div>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <Checkbox id="currentLocation" checked={currentLocation} onCheckedChange={handleCheckboxChange} />
+                                    <Label htmlFor="currentLocation">Set your current location</Label>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <Checkbox id="availability" checked={vehicle.availability} onCheckedChange={(checked) => setVehicle(prev => ({ ...prev, availability: checked }))} />
+                                    <Label htmlFor="availability">Available for rent</Label>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="images">Images</Label>
+                                    <Input type="file" name="images" onChange={handleImageChange} multiple />
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="category">Category</Label>
+                                        <Select name="category" value={vehicle.category} onValueChange={handleChange}>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select category" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {Object.values(VehicleCategories).map((category) => (
+                                                    <SelectItem key={category} value={category}>{category}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="condition">Condition</Label>
+                                        <Input type="text" name="condition" value={vehicle.condition} onChange={handleChange} required />
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="no_plate">Number Plate</Label>
+                                        <Input type="text" name="no_plate" value={vehicle.no_plate} onChange={handleChange} required />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="chassis_no">Chassis Number</Label>
+                                        <Input type="text" name="chassis_no" value={vehicle.chassis_no} onChange={handleChange} required />
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="registration_no">Registration Number</Label>
+                                    <Input type="text" name="registration_no" value={vehicle.registration_no} onChange={handleChange} required />
+                                </div>
+                            </>
+                        )}
+                    </CardContent>
+                    <CardFooter className="flex justify-between">
+                        {step === 2 && (
+                            <Button type="button" variant="outline" className='text-white bg-black/90' onClick={prevStep}>
                                 Previous
-                            </button>
-                            <button
-                                type="submit"
-                                className="px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-200"
-                            >
+                            </Button>
+                        )}
+                        {step === 1 ? (
+                            <Button type="button" variant='outline' className='text-white bg-black/90' onClick={nextStep}>
+                                Next
+                            </Button>
+                        ) : (
+                            <Button type="submit" variant='secondary' className='text-white bg-black/90'>
                                 Add Vehicle
-                            </button>
-                        </div>
-                    </>
-                )}
-            </form>
+                            </Button>
+                        )}
+                    </CardFooter>
+                </form>
+            </Card>
         </div>
 
     );

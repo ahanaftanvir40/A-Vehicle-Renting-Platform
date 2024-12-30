@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+    font-family:"Noto Sans", sans-serif;
+}
+
+
+body{
+    background-color: var(--gray-08);
+
+}
+.chat-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100vh;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 50px;
+
+    .chat{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 10px;
+        overflow-y: auto;
+        
+        .message{
+            display: flex;
+            gap: 10px;
+            .profile{
+                flex-shrink: 0;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: var(--gray-15);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 10px;
+            }
+
+            .message-content{
+                padding: 10px;
+            }
+        }
+        .LLama{
+            justify-content: flex-start;
+
+            .message-content{
+                background-color: var(--gray-15);
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                gap : 10px;
+                padding: 20px;
+                margin-right: 80px;
+                p{
+                    font-size: 18px;
+                }
+                ul,ol{
+                    // list-style: none;
+                    padding-left: 30px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    li{
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+        .user{
+            justify-content: flex-end;
+        }
+
+    }
+    
+}
+
+.input-container{
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    input{
+        flex: 1;
+        padding: 15px 24px;
+        border: none;
+        border-radius: 30px;
+        background-color: var(--gray-15);
+        color: white;
+        font-size: 18px;
+    }
+    button{
+        padding: 15px;
+        border: none;
+        border-radius: 30px;
+        background-color: var(--gray-15);
+        color: white;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover{
+            background-color: var(--gray-20);
+        }
+    }
+}

@@ -49,7 +49,7 @@ const vehicleSchema = new mongoose.Schema({
         type: Array,
         required: true,
     }],
-    /*ratings: [{
+    ratings: [{
         userId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'user',
@@ -62,7 +62,11 @@ const vehicleSchema = new mongoose.Schema({
         review: {
             type: String,
         },
-    }],*/
+    }],
+    averageRating: {
+        type: Number,
+        default: 0,
+    },
     category: {
         type: String,
         enum: ['Sedan', 'SUV', 'Sports Car', 'Wagon', 'MiniVan', 'Convertible', 'Commuter Bike', 'Sports Bike', 'Cruiser Bike', 'Scooter'],
@@ -90,3 +94,5 @@ const vehicleSchema = new mongoose.Schema({
 
 
 export const Vehicle = mongoose.model('vehicle', vehicleSchema)
+
+

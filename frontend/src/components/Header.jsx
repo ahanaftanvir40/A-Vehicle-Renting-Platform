@@ -3,22 +3,24 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
 import { useEffect, useState } from "react";
+import { useTheme } from "@/store/themeProvider";
 
 function Header() {
   const { user } = useAuth();
+  const { setTheme, theme } = useTheme()
 
   let navigate = useNavigate();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "dark"
-  );
+  // const [theme, setTheme] = useState(
+  //   localStorage.getItem("theme") ? localStorage.getItem("theme") : "dark"
+  // );
 
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    const localTheme = localStorage.getItem("theme");
-    document.querySelector("html").setAttribute("class", localTheme);
-  }, [theme]);
+  // useEffect(() => {
+  //   localStorage.setItem("theme", theme);
+  //   const localTheme = localStorage.getItem("theme");
+  //   document.querySelector("html").setAttribute("class", localTheme);
+  // }, [theme]);
 
   const handleTheme = (e) => {
     if (e.target.checked) {
@@ -46,8 +48,8 @@ function Header() {
   return (
     <div>
       <div className="py-2 hidden sm:flex"></div>
-      <div className="relative mx-auto transform md:w-full lg:w-1/2 lg:rounded-full py-4 dark:bg-slate-900 bg-[#2f2d3b]  w-full sm:px-10 transition-all duration-500 sm:hover:w-7/12 ">
-        <div className="mx-auto px-4 flex justify-between items-center">
+      <div className="relative mx-auto transform w-full md:w-full lg:w-2/3 lg:rounded-full py-4 dark:bg-slate-900 bg-[#2f2d3b] sm:px-10 transition-all duration-500 ">
+        <div className="mx-auto px-4 flex justify-between items-center text-white">
           {/* Logo and Branding */}
           <Link
             to="/"
@@ -64,7 +66,7 @@ function Header() {
           </Link>
 
           {/* Navigation Links */}
-          <ul className=" flex space-x-4 sm:space-x-8">
+          <ul className=" flex space-x-4 sm:space-x-8 text-white">
             <li>
               <Link
                 to="/"
@@ -75,7 +77,7 @@ function Header() {
             </li>
             <li>
               <Link
-                to="#"
+                to="/WheelHub"
                 className="dark:text-white/60 hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-300"
               >
                 WheelHub
