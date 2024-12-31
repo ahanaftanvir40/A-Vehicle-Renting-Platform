@@ -16,7 +16,7 @@ const CommentsSection = ({ post, onCommentSubmit, onReplySubmit }) => {
                     value={newComment}
                     onChange={(e) => setNewComment(e.target.value)}
                     placeholder="Add a comment..."
-                    className="w-full p-2 border rounded"
+                    className="w-full p-2 border border-black/60 rounded text-white/90 outline-none"
                 />
                 <button
                     onClick={() => {
@@ -52,7 +52,7 @@ const CommentsSection = ({ post, onCommentSubmit, onReplySubmit }) => {
                                 value={reply.commentId === comment._id ? reply.text : ""}
                                 onChange={(e) => handleReplyChange(comment._id, e.target.value)}
                                 placeholder="Reply..."
-                                className="w-full p-2 border rounded"
+                                className="w-full p-2 border border-black/60 bg-gray-800 text-white/90 outline-none rounded"
                             />
                             <button
                                 onClick={() => {

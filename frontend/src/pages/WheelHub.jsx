@@ -26,7 +26,7 @@ const WheelHub = () => {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                     },
                 });
-                setPosts(response.data);
+                setPosts(response.data.reverse());
             } catch (error) {
                 console.error(error);
             }
