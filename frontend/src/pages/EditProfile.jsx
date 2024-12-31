@@ -78,7 +78,7 @@ function EditProfile() {
 
 
     return (
-        <div className="flex flex-col items-center p-20">
+        <div className="flex flex-col items-center p-20 min-h-screen">
             <div className="w-full max-w-md">
                 <h1 className="text-center mb-10 text-3xl font-medium bg-gradient-to-r from-orange-500 to-blue-500 text-transparent bg-clip-text">Update Your Profile</h1>
                 <form onSubmit={handleSubmit} className="text-black">
@@ -92,7 +92,7 @@ function EditProfile() {
                     </div>
                     <div className="mb-5">
                         <label htmlFor="userType" className="block mb-2 text-sm font-medium text-slate-300">Change User Type:</label>
-                        <select name="userType" value={userData.userType} onChange={onChange}>
+                        <select name="userType" value={userData.userType} onChange={onChange} className="bg-white/90 text-black p-4">
                             <option value="Normal">Normal</option>
                             <option value="Driver">Driver</option>
                         </select>

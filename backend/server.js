@@ -8,7 +8,6 @@ import vehicleRoutes from "./routes/vehicleRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
-import ollamaRoutes from "./routes/ollamaRoutes.js";
 import wheelhubRoutes from "./routes/wheelhubRoutes.js";
 import dotenv from "dotenv";
 import path from "path";
@@ -42,7 +41,6 @@ app.use("/api", vehicleRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api", bookingRoutes);
 app.use("/api", notificationRoutes);
-app.use("/api/ollama", ollamaRoutes);
 app.use("/api", wheelhubRoutes);
 
 const server = http.createServer(app);
