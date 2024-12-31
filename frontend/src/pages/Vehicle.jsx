@@ -395,7 +395,7 @@ function Vehicle() {
                                 minDate={new Date()}
                                 excludeDates={unavailableDateObjects}
                                 placeholderText="Select a start date"
-                                className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                className="mt-2 bg-gray-700 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                               />
                             </label>
 
@@ -408,7 +408,7 @@ function Vehicle() {
                                 minDate={startDate ? new Date(startDate.getTime() + 86400000) : new Date()} // One day after start date
                                 excludeDates={unavailableDateObjects}
                                 placeholderText="Select an end date"
-                                className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-gray-700"
                               />
                             </label>
                             <label className="block">
@@ -416,10 +416,10 @@ function Vehicle() {
                               <select
                                 {...register("driverId", { required: "Driver selection is required" })}
                                 defaultValue={drivers[0]._id}
-                                className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-gray-700"
                               >
                                 {drivers.map((driver) => (
-                                  <option key={driver._id} value={driver._id}>
+                                  <option key={driver._id} value={driver._id} className="text-black">
                                     {driver.name}
                                   </option>
                                 ))}

@@ -103,7 +103,7 @@ function UserDashboard() {
   console.log('User: ', user);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 min-h-screen">
       <div className="flex items-center justify-center gap-4 mb-6">
         <div className="w-16 h-16 rounded-full overflow-hidden shadow-md">
           <img

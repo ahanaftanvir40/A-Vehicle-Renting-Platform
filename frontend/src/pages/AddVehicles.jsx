@@ -36,7 +36,15 @@ function AddVehicles() {
     const [images, setImages] = useState([]);
 
     const handleChange = (e) => {
-        setVehicle({ ...vehicle, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setVehicle((prevVehicle) => ({ ...prevVehicle, [name]: value }));
+    };
+
+    const handleSelectChange = (name, value) => {
+        setVehicle((prevVehicle) => ({
+            ...prevVehicle,
+            [name]: value,
+        }));
     };
 
     const handleImageChange = (e) => {
@@ -125,7 +133,7 @@ function AddVehicles() {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="space-y-2">
                                         <Label htmlFor="type">Type</Label>
-                                        <Select name="type" value={vehicle.type} onValueChange={handleChange}>
+                                        <Select name="type" value={vehicle.type} onValueChange={(value) => handleSelectChange('type', value)}>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Select vehicle type" />
                                             </SelectTrigger>
@@ -184,7 +192,7 @@ function AddVehicles() {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="space-y-2">
                                         <Label htmlFor="category">Category</Label>
-                                        <Select name="category" value={vehicle.category} onValueChange={handleChange}>
+                                        <Select name="category" value={vehicle.category} onValueChange={(value) => handleSelectChange('category', value)}>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Select category" />
                                             </SelectTrigger>
@@ -228,7 +236,7 @@ function AddVehicles() {
                                 Next
                             </Button>
                         ) : (
-                            <Button type="submit" variant='secondary' className='text-white bg-black/90'>
+                            <Button type="submit" variant='secondary' className='text-white bg-black/90 hover:bg-black/60'>
                                 Add Vehicle
                             </Button>
                         )}

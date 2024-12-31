@@ -123,7 +123,7 @@ function SignUp() {
                     </div>
                     <div className="mb-5">
                         <label htmlFor="userType" className="block mb-2 text-sm font-medium text-slate-300">Select User Type:</label>
-                        <select name="userType" value={userData.userType} onChange={onChange}>
+                        <select name="userType" value={userData.userType} onChange={onChange} className="bg-white/90 p-4">
                             <option value='Normal'>Normal</option>
                             <option value="Driver">Driver</option>
                         </select>
