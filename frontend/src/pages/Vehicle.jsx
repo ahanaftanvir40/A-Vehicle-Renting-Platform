@@ -493,6 +493,8 @@ function Vehicle() {
           <OwnerChatComponent
             vehicleId={vehicleId}
             ownerId={vehicle.ownerId && vehicle.ownerId._id}
+            username={authUserName}
+            ownerName={vehicle.ownerId && vehicle.ownerId.name}
           />
         )}
       </div>
